@@ -8,6 +8,7 @@ namespace Sidekick.Helpers
 {
     public static class StringConstants
     {
+        public const string RarityAnyNonUnique = "NonUnique";
         public const string RarityUnique = "Unique";
         public const string RarityRare = "Rare";
         public const string RarityMagic = "Magic";

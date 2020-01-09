@@ -203,7 +203,25 @@ namespace Sidekick.Helpers.POETradeAPI
             return result;
         }
 
+        public static async Task<QueryResult<ListingResult>> GetBaseListings(Item item)
+        {
+            var queryResult = await Query(item);
+            if (queryResult != null)
+            {
+                var result = await Task.WhenAll(Enumerable.Range(0, 2).Select(x => GetListings(queryResult, x)));
 
+                return new QueryResult<ListingResult>()
+                {
+                    Id = queryResult.Id,
+                    Result = result.Where(x => x != null).SelectMany(x => x.Result).ToList(),
+                    Total = queryResult.Total,
+                    Item = item,
+                    Uri = queryResult.Uri
+                };
+            }
+
+            return null;
+        }
         public static void Dispose()
         {
             _httpClient.Dispose();

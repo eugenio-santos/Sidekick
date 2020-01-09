@@ -181,7 +181,8 @@ namespace Sidekick.Helpers
 
         internal static InfluenceType GetInfluenceType(string input)
         {
-            switch(input)
+            input = input.Substring(0, input.IndexOf(" "));
+            switch (input)
             {
                 case StringConstants.InfluenceShaper:
                     return InfluenceType.Shaper;

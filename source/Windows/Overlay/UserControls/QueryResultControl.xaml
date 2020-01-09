@@ -65,5 +65,14 @@
                 </TextBlock>
             </Hyperlink>
         </TextBlock>
+        <Button
+            Grid.Column="1"
+            Grid.RowSpan="2"
+            Content="Base"
+            FontSize="14"
+            FontWeight="Bold" 
+            Margin="130,0,0,0" Click="Button_Click"
+            >
+        </Button>
     </Grid>
 </UserControl>

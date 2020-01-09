@@ -10,6 +10,8 @@ namespace Sidekick.Helpers
 {
     public static class EventsHandler
     {
+        private static Item currentItem { get; set; }
+
         private static IKeyboardMouseEvents _globalHook;
 
         public static void Initialize()
@@ -71,6 +73,7 @@ namespace Sidekick.Helpers
             var item = ItemParser.ParseItem(itemText);
             if (item != null)
             {
+                currentItem = item;
                 OverlayController.SetPosition(Cursor.Position.X, Cursor.Position.Y);
                 OverlayController.Show();
 
@@ -83,6 +86,29 @@ namespace Sidekick.Helpers
             }
 
             OverlayController.Hide();
+        }
+
+        public static async void GetBaseListing()
+        {
+            if (currentItem.GetType() == typeof(EquippableItem))
+            {
+                var item = (EquippableItem)currentItem;
+
+                item.Rarity = StringConstants.RarityAnyNonUnique;
+
+
+                var queryResult = await TradeClient.GetListings(item);
+                if (queryResult != null)
+                {
+                    OverlayController.SetQueryResult(queryResult);
+                    return;
+                }
+            }
+        }
+
+        public static void DeleteCurrentItem()
+        {
+            currentItem = null;
         }
 
         public static void Dispose()

@@ -1,4 +1,5 @@
-﻿using Sidekick.Helpers.POETradeAPI.Models;
+﻿using Sidekick.Helpers;
+using Sidekick.Helpers.POETradeAPI.Models;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -20,7 +21,11 @@ namespace Sidekick.Windows.Overlay
 
         public static void Show() => _overlayWindow.ShowWindow();
 
-        public static void Hide() => _overlayWindow.HideWindowAndClearData();
+        public static void Hide()
+        {
+            EventsHandler.DeleteCurrentItem();
+            _overlayWindow.HideWindowAndClearData();
+        }
 
         public static void SetPosition(int x, int y)
         {

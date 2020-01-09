@@ -34,13 +34,59 @@ namespace Sidekick.Helpers.POETradeAPI.Models
                     Query.Filters.MiscFilters.Filters.ItemLevel = new FilterValue()
                     {
                         Min = result,
-                        Max = result,
                     };
 
                     Query.Filters.TypeFilter.Filters.Rarity = new FilterOption()
                     {
                         Option = ((EquippableItem)item).Rarity.ToLowerInvariant(),
                     };
+
+                    if(((EquippableItem)item).Influence != InfluenceType.None)
+                    {
+                        if(((EquippableItem)item).Influence == InfluenceType.Shaper)
+                        {
+                            Query.Filters.MiscFilters.Filters.Shaper = new FilterOption()
+                            {
+                                Option = "true"
+                            };
+                        }
+                        if (((EquippableItem)item).Influence == InfluenceType.Elder)
+                        {
+                            Query.Filters.MiscFilters.Filters.Elder = new FilterOption()
+                            {
+                                Option = "true"
+                            };
+                        }
+                        if (((EquippableItem)item).Influence == InfluenceType.Redeemer)
+                        {
+                            Query.Filters.MiscFilters.Filters.Redeemer = new FilterOption()
+                            {
+                                Option = "true"
+                            };
+                        }
+                        if (((EquippableItem)item).Influence == InfluenceType.Hunter)
+                        {
+                            Query.Filters.MiscFilters.Filters.Hunter = new FilterOption()
+                            {
+                                Option = "true"
+                            };
+                        }
+                        if (((EquippableItem)item).Influence == InfluenceType.Warlord)
+                        {
+                            Query.Filters.MiscFilters.Filters.Warlord = new FilterOption()
+                            {
+                                Option = "true"
+                            };
+                        }
+                        if (((EquippableItem)item).Influence == InfluenceType.Crusader)
+                        {
+                            Query.Filters.MiscFilters.Filters.Crusader = new FilterOption()
+                            {
+                                Option = "true"
+                            };
+                        }
+                    }
+                    
                 }             
 
                 if(((EquippableItem)item).Links != null)        // Auto Search 5+ Links
@@ -272,6 +318,22 @@ namespace Sidekick.Helpers.POETradeAPI.Models
         public FilterOption Corrupted { get; set; }
         public FilterOption Crafted { get; set; }
         public FilterOption Enchanted { get; set; }
+
+
+        [JsonProperty(PropertyName = "shaper_item")]
+        public FilterOption Shaper { get; set; }
+        [JsonProperty(PropertyName = "elder_item")]
+        public FilterOption Elder { get; set; }
+        [JsonProperty(PropertyName = "crusader_item")]
+        public FilterOption Crusader { get; set; }
+        [JsonProperty(PropertyName = "hunter_item")]
+        public FilterOption Hunter { get; set; }
+        [JsonProperty(PropertyName = "redeemer_item")]
+        public FilterOption Redeemer { get; set; }
+        [JsonProperty(PropertyName = "warlord_item")]
+        public FilterOption Warlord { get; set; }
+        
+
     }
 
     public class WeaponFilters

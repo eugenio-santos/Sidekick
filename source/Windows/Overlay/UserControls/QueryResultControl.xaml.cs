@@ -20,5 +20,10 @@ namespace Sidekick.Windows.Overlay.UserControls
             Process.Start(new ProcessStartInfo(uri));
             e.Handled = true;
         }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            EventsHandler.GetBaseListing();
+        }
     }
 }
