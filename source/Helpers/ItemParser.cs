@@ -181,7 +181,7 @@ namespace Sidekick.Helpers
 
         internal static InfluenceType GetInfluenceType(string input)
         {
-            input = input.Substring(0, input.IndexOf(" "));
+            input = input.Substring(0, input.IndexOf(" "));  // This doesn't deal with double influence
             switch (input)
             {
                 case StringConstants.InfluenceShaper:
@@ -214,7 +214,7 @@ namespace Sidekick.Helpers
         public string Rarity { get; set; }
         public string Quality { get; set; }
         public string ItemLevel { get; set; }
-        public InfluenceType Influence { get; set; }
+        public InfluenceType Influence { get; set; } // needs to consider double influence either a second influence field or a list of influences
         public SocketFilterOption Sockets { get; set; }
         public SocketFilterOption Links { get; set; }
     }
